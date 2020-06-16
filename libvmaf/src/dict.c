@@ -66,6 +66,7 @@ int vmaf_dictionary_set(VmafDictionary **dict, const char *key, const char *val,
     if (!val_copy) goto fail;
 
     if (existing_entry && !(flags & VMAF_DICT_DO_NOT_OVERWRITE)) {
+        free(existing_entry->val);
         existing_entry->val = val_copy;
         return 0;
     }

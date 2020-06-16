@@ -51,7 +51,7 @@ int vmaf_dictionary_set(VmafDictionary **dict, const char *key, const char *val,
     }
 
     VmafDictionaryEntry *existing_entry = vmaf_dictionary_get(&d, key, 0);
-    if (existing_entry && (flags & VMAF_DICTIONARY_DONT_OVERWRITE))
+    if (existing_entry && (flags & VMAF_DICT_DO_NOT_OVERWRITE))
         return -EINVAL;
 
     if (d->cnt == d->size) {
@@ -65,7 +65,7 @@ int vmaf_dictionary_set(VmafDictionary **dict, const char *key, const char *val,
     const char *val_copy = strdup(val);
     if (!val_copy) goto fail;
 
-    if (existing_entry && !(flags & VMAF_DICTIONARY_DONT_OVERWRITE)) {
+    if (existing_entry && !(flags & VMAF_DICT_DO_NOT_OVERWRITE)) {
         existing_entry->val = val_copy;
         return 0;
     }
